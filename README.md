@@ -23,7 +23,7 @@ pip install -r requirements.txt
 Then start it:
 
 ```bash
-python voccinator.py
+python voccinator3.py
 ```
 
 The first time you run it, the program asks where it should keep your learnsets. Press enter to put the folder in the current directory, or type N and give it your own path. It remembers your choice, so you only do this once.
@@ -37,6 +37,52 @@ While practising you can type these instead of an answer:
 * `save` stores your current progress
 * `load` brings that progress back
 * `exit` leaves the practise mode
+
+## A quick tutorial
+
+### 1. Create a learnset
+
+1. Start Voccinator and choose **Create New Learnset** from the home menu.
+2. Enter a name for the learnset, for example `French Basics`.
+3. Enter a word and its definition when asked.
+4. Repeat for as many words as you like. Type `exit` instead of a word to finish adding words.
+
+### 2. Practise your words
+
+1. Choose **Write Practise** from the home menu.
+2. Select the learnset you want to practise.
+3. Type the exact definition of each displayed word and press enter.
+4. Correct answers are removed from the pile. Wrong answers stay in the pile and appear again later.
+5. Continue until Voccinator tells you that you have defined all words correctly.
+
+### 3. Save and load your progress
+
+Saving and loading happen while you are in **Write Practise**, at the prompt where you enter a definition:
+
+```text
+word shown by Voccinator
+Enter definition: save
+Saving...
+```
+
+To continue later, start **Write Practise** again, choose the learnset, and type `load` at the definition prompt:
+
+```text
+word shown by Voccinator
+Enter definition: load
+Fetching data...
+```
+
+Your saved progress is restored and you can continue answering definitions. Type `exit` at any definition prompt when you want to leave practice. Saving creates a small progress file next to the program, so keep it there if you want to load the saved progress later.
+
+### 4. Other home menu commands
+
+* **Create New Learnset** creates a new CSV learnset.
+* **Edit Existing Learnset** adds more word and definition pairs to an existing learnset. Type `exit` when you are finished.
+* **Show Learnset** displays all words and definitions in a learnset.
+* **Write Practise** starts a vocabulary quiz and includes the `save`, `load`, and `exit` commands described above.
+* **Delete Words From Learnset** lets you select and remove one or more words, then asks you to confirm.
+* **Exit** closes Voccinator.
 
 ## My learnsets
 
