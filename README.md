@@ -38,7 +38,7 @@ While practising you can type these instead of an answer:
 * `load` brings that progress back
 * `exit` leaves the practise mode
 
-My learnsets
+## My learnsets
 
 I pushed my own learnsets to this repo as well, so you do not have to start from zero. They are in the LEARNSETS folder and you can just use them, copy them or change them however you like. They are normal CSV files, so if you want to add your own words you can either do it in the program or open the file in a text editor. No promises that every definition is perfect, they are the ones I made for school.
 
