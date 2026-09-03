@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.path_to_learnsets.txt
+.write_idx.npy
