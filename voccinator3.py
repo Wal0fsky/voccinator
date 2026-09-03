@@ -103,7 +103,7 @@ class VoccinatorV3() :
             self._save_folder_path(file, cwd_folder)
             return
 
-
+        
         # if no path to app data is specified let the user select one or specify one
         answer = input(self.texts["no-folder"]).strip()
 
@@ -128,8 +128,14 @@ class VoccinatorV3() :
         with open(file, "w") as f :
             f.write(target)
 
+    # remember where the learnsets live
+    def _save_folder_path(self, file, path) :
+        self.folder_path = path
+        with open(file, "w") as f :
+            f.write(path)
+
     # let user choose a feature -> executre choosen one
-    def         _choose_features(self) :
+    def _choose_features(self) :
         feature = inquirer.select(
             message=self.texts["select-feature-info"], 
             choices=self.app_features
