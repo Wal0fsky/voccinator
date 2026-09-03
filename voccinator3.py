@@ -80,42 +80,53 @@ class VoccinatorV3() :
         # welcome user 
         print(self.texts["welcome"])
 
-    # is there already a folder for the learnsets? -> if not creat one. 
-    def _checkon_learnset_folder(self) : 
+       # is there already a folder for the learnsets? -> if not creat one.
+    def _checkon_learnset_folder(self) :
 
         # create path to file which stores the path to app data
         file = os.path.join(self.script_dir, ".path_to_learnsets.txt")
-        
+
         # get path to app data (if path is specified)
-        if os.path.isfile(file) : 
-            with open(file, "r") as f : 
-                path = f.read()
-                if os.path.exists(path) :   
+        if os.path.isfile(file) :
+            with open(file, "r") as f :
+                path = f.read().strip()
+                if os.path.isdir(path) :
                     self.folder_path = path
-                else : 
+                    return
+                else :
                     print(self.texts["folder-path-error"])
                     exit()
+
+        # a learnset folder is already sitting in the cwd -> adopt it silently
+        cwd_folder = os.path.join(os.getcwd(), "LEARNSETS")
+        if os.path.isdir(cwd_folder) :
+            self._save_folder_path(file, cwd_folder)
+            return
+
+
         # if no path to app data is specified let the user select one or specify one
-        else : 
-            answer = input(self.texts["no-folder"])
-            # custom path?
-            if answer == "N" : 
-                cfpath = input(self.texts["custom-folder"])
-                if os.path.exists(cfpath) : 
-                    cfpath = os.path.join(cfpath, "LEARNSETS")
-                    os.mkdir(cfpath)
-                    self.folder_path = cfpath
-                    with open(file, "w") as f : 
-                        f.write(cfpath)
-                else : 
-                    print(self.texts["custom-folder-error"])
-                    exit()
-            else : 
-                fpath = os.path.join(os.getcwd(), "LEARNSETS")
-                os.mkdir(fpath)
-                self.folder_path = fpath
-                with open(file, "w") as f : 
-                        f.write(fpath)
+        answer = input(self.texts["no-folder"]).strip()
+
+        # custom path?
+        if answer.upper() == "N" :
+            cfpath = input(self.texts["custom-folder"]).strip()
+            if not os.path.isdir(cfpath) :
+                print(self.texts["custom-folder-error"])
+                exit()
+            target = os.path.join(cfpath, "LEARNSETS")
+        else :
+            target = os.path.join(os.getcwd(), "LEARNSETS")
+
+        # adopt the folder if it already exists, otherwise create it
+        try :
+            os.makedirs(target, exist_ok=True)
+        except OSError :
+            print(self.texts["custom-folder-error"])
+            exit()
+
+        self.folder_path = target
+        with open(file, "w") as f :
+            f.write(target)
 
     # let user choose a feature -> executre choosen one
     def         _choose_features(self) :
